@@ -1,4 +1,11 @@
 .vscode/
+certs/
+*.env
+!example.env
+*.yaml
+!example.yaml
+!routes.yaml
+!en.yaml
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
