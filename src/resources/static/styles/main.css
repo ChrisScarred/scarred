@@ -1,0 +1,333 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:200,200i,600,600i,900&subset=latin-ext');
+:root {
+    --main-shadow-color: #14191C;
+    --main-light-color: #f4fbff;
+    --main-highlight-color: #8864bc;
+    --main-hover-color: #e47171;
+    --main-font-size: 1.25rem;
+    --main-line-height: 1.75rem;
+    --main-font-weight: 200;
+    --main-width: 60%;
+    --main-transition: 0.7s;
+    --h2-font-size: 2.5rem;
+    --h2-line-height: 3rem;
+    --h2-font-weight: 600;
+    --intro-h2-font-size: 5rem;
+    --intro-h2-line-height: 5.5rem;
+    --secondary-highlight-color: #bca264;
+    --secondary-shadow-color: #1c1714;
+    --secondary-light-color: #fff8f4;
+    --note-color: #5a5a5a;
+    --small-border-radius: 0.25rem;
+    --big-border-radius: 0.5rem;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    background-color: var(--main-shadow-color);
+    height: 100%;
+    overflow: auto;
+    font-size: var(--main-font-size);
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: var(--main-font-weight);
+    color: var(--main-light-color);
+    line-height: var(--main-line-height);
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+.warning {
+    color: var(--main-hover-color);
+    margin: 2rem 0;
+}
+
+.warning::before {
+    content: "Warning: "
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 100%;
+    width: var(--main-width);
+    margin: 0 auto;
+    padding-bottom: 3rem;
+    flex-basis: 70%;
+    flex-grow: 6;
+}
+
+form {
+    width: 80%;
+}
+
+form textarea {
+    height: 10rem;
+    width: 100%;
+    resize: both;
+    margin: 0.5rem 0;
+    overflow: auto;
+    background-color: var(--main-light-color);
+    color: var(--main-shadow-color);
+    font-size: 0.9rem;
+    font-weight: var(--main-font-weight);
+    border-color: var(--secondary-shadow-color);
+    border-radius: var(--big-border-radius);
+    padding: 0.25rem 0.5rem;
+}
+
+form input {
+    width: 50%;
+    resize: vertical;
+    margin: 0.5rem 0;
+    overflow: auto;
+    background-color: var(--main-light-color);
+    color: var(--main-shadow-color);
+    font-size: 0.9rem;
+    font-weight: var(--main-font-weight);
+    border-color: var(--secondary-shadow-color);
+    border-radius: var(--small-border-radius);
+    padding: 0.25rem 0.5rem;
+}
+
+label {
+    margin-left: 1rem;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    flex-basis: 5%;
+    width: 100%;
+    text-transform: uppercase;
+    padding-right: 2rem;
+}
+
+nav a,
+.logo-nav-wrap {
+    display: inline-block;
+    padding: 0.5rem;
+}
+
+nav:last-child {
+    padding-right: 2rem;
+}
+
+nav:first-child {
+    padding-left: 2rem;
+}
+
+footer p {
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 0.25rem;
+    line-height: 1rem;
+}
+
+footer {
+    flex-basis: 5%;
+    display: flex;
+    flex-grow: 2;
+    flex-direction: column;
+    justify-content: end;
+    width: 100%;
+    margin: 0.5rem;
+}
+
+.version-info {
+    flex-grow: 1;
+    text-transform: none;
+}
+
+.main-logo-path,
+.small-logo-path {
+    fill-rule: evenodd;
+    cursor: pointer;
+}
+
+.main-logo-path {
+    fill: url(#main-logo-gradient);
+}
+
+.small-logo-path {
+    fill: var(--main-highlight-color);
+}
+
+.small-logo {
+    height: 1.5rem;
+    margin: 0.5rem;
+    display: block;
+    width: 1.5rem;
+}
+
+.main-logo {
+    height: 12rem;
+    margin-bottom: 5rem;
+}
+
+.content div {
+    width: 100%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+#id_recipient {
+    height: 5rem;
+    overflow-y: scroll;
+    padding-left: 0;
+    margin-left: 0.5rem 0;
+    width: 100%;
+}
+
+#id_recipient li {
+    list-style-type: none;
+}
+
+#id_recipient li label {
+    margin-left: 0;
+}
+
+#id_recipient li label input {
+    margin-left: 0;
+}
+
+.intro {
+    text-align: center;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+}
+
+.intro:first-child {
+    margin-top: 10%;
+}
+
+h2 {
+    font-size: var(--h2-font-size);
+    line-height: var(--h2-line-height);
+    text-transform: uppercase;
+    color: var(--main-highlight-color);
+    font-weight: var(--h2-font-weight);
+}
+
+.intro h2 {
+    font-size: var(--intro-h2-font-size);
+    line-height: var(--intro-h2-line-height);
+    -webkit-margin-before: 0;
+    margin-block-start: 0;
+    -webkit-margin-after: 0;
+    margin-block-end: 0;
+    padding: 1.5rem 0;
+}
+
+p {
+    padding: 1rem 0;
+    -webkit-margin-before: 0;
+    margin-block-start: 0;
+    -webkit-margin-after: 0;
+    margin-block-end: 0;
+    text-align: justify;
+}
+
+.newline {
+    padding: 2rem 0;
+}
+
+.note {
+    color: var(--note-color);
+}
+
+.intro p {
+    font-style: italic;
+    text-align: center;
+}
+
+a,
+.intro .note a {
+    color: var(--main-highlight-color);
+    text-decoration: none;
+}
+
+a:hover,
+.intro .note a:hover {
+    text-decoration: none;
+    -o-transition: var(--main-transition);
+    -ms-transition: var(--main-transition);
+    -moz-transition: var(--main-transition);
+    -webkit-transition: var(--main-transition);
+    transition: var(--main-transition);
+    color: var(--main-hover-color);
+}
+
+.intro a {
+    text-decoration: none;
+    color: var(--main-highlight-color);
+}
+
+.intro a:hover {
+    text-decoration: none;
+    color: var(--main-highlight-color);
+}
+
+button,
+input {
+    border-radius: var(--small-border-radius);
+    padding: 0.25rem 0.5rem;
+    margin: 0 0.5rem;
+    box-sizing: border-box;
+}
+
+button,
+input[type=submit] {
+    border: 0.05rem solid var(--secondary-highlight-color);
+    display: inline-block;
+    cursor: pointer;
+    color: var(--secondary-highlight-color);
+    text-decoration: none;
+    background-color: transparent;
+    text-transform: uppercase;
+    width: 25%;
+    align-self: center;
+}
+
+button:hover,
+input[type=submit]:hover {
+    color: var(--secondary-shadow-color);
+    background: linear-gradient(to bottom, var(--secondary-highlight-color) 5%, var(--secondary-light-color) 100%);
+    background-color: var(--secondary-highlight-color);
+}
+
+.intro button,
+button.big {
+    border-radius: var(--big-border-radius);
+    border: 0.1rem solid var(--secondary-highlight-color);
+    padding: 0.5rem 1rem;
+    margin: 2rem 1rem;
+    font-size: var(--h2-font-weight);
+}
+
+.buttons {
+    margin-top: 2.5rem;
+}
+
+.sec-high {
+    color: var(--secondary-highlight-color);
+    text-transform: uppercase;
+}
