@@ -1,0 +1,19 @@
+{
+    "name": "Chris Scar(R)ed",
+    "short_name": "Chris Scar(R)ed",
+    "icons": [
+        {
+            "src": "/static/pics/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/pics/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#6e39b2",
+    "background_color": "#6e39b2",
+    "display": "standalone"
+}
