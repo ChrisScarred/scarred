@@ -1,0 +1,28 @@
+database:
+  password: ""
+  user: ""
+  name: ""
+  ssl_mode: ""
+  engine: ""
+  host: ""
+  port: ""
+  url_pattern: "<database.engine>://<database.user>:<database.password>@<database.host>:<database.port>//<database.name>?sslmode=<database.ssl_mode>"
+app:
+  version: "0.0.1"
+  debug: True
+  name: ""
+  resources:
+    static: "src/resources/static"
+    templates: "src/resources/templates"
+    locales: "src/resources/locales"
+    routes: "src/resources/routes.yaml"
+  lang: "en"
+  pubdate: ""
+  author: ""
+  buymeacoffee: ""
+security:
+  hosts: 
+    - "127.0.0.1"
+    - "localhost"
+  origins:
+    - "https://127.0.0.1"

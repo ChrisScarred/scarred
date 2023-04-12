@@ -1,0 +1,12 @@
+routes:
+  static: "static"
+  dbc: "dog-breed-classifier"
+  not_found: "not-found"
+  error: "error"
+  version: "version"
+param_names:
+  path: "path"
+  code: "code"
+views:
+  intro: "intro.html"
+  content: "content.html"
