@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="{{ lang or 'app.lang' | env_val('')}}">
+
+
+<head>
+
+    <meta charset="utf-8"> 
+    {% if title %}
+    <title>{{ title }} | {{'app.name' | env_val('My App')}}</title>
+    {% else %}
+    <title>{{ 'app.name' | env_val('My App') }}</title>
+    {% endif %}
+
+    <meta name="description" content="{{ desc or 'app.name' | env_val('My App') }}">
+
+    {% if author %}
+    <meta name="author" content="{{ author }}, {{ 'author' | env_val}}"> 
+    {% else %}
+    <meta name="author" content="{{ 'author' | env_val}}"> 
+    {% endif %}
+
+    {% include 'favicons.html' %}
+
+    {% block scripts %}
+    <script src="/static/scripts/main.js"></script>
+    {% endblock %}
+
+    {% block styles %}
+    <link rel="stylesheet" href="/static/styles/main.css"> 
+    {% endblock %}
+
+</head>
+
+
+
+<body>
+    <nav>
+        <div class="small-logo-wrap">
+            {% include 'svg/small-logo.html' %}
+        </div>
+
+        <a href="/{{ 'routes.version' | env_val('version') }}" class="version-info">{{ 'app.name' | env_val('My App') }} {{ 'app.version' | env_val('Alpha') }}</a>
+        <a href="/">{{ 'en' | loc('home') }}</a>
+    </nav>
+
+    <div class="content">
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %} 
+        
+        {% if header %}
+        <h2>{{ header }}</h2>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </div>
+        
+    <footer>
+        <div class="note">
+            {% if 'app.pubdate' | env_val %}
+            <p class="pubdate">{{ 'en' | loc('update') }}: {{ 'app.pubdate' | env_val }}.</p>
+            {% endif %}
+            <p class="copyright">&copy; {{ x | year }}, {{ 'app.author' | env_val}}</p>
+            {% if 'app.buymeacoffee' | env_val %}
+            <p class="buymeacoffee"><a href="{{ 'app.buymeacoffee' | env_val }}">{{ 'en' | loc('buymea') }}</a></p>
+            {% endif %}
+        </div>
+    </footer>        
+    
+</body>
+
+</html>

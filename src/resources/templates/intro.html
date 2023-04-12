@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block content %}
+<div class="intro">
+    <div>{% include 'svg/main-logo.html' %}</div>
+
+    <h2>{{'app.name' | env_val('My App')}}</h2>
+
+    <div class="content">
+        {% if content %}
+            {{ content }}
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}
