@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from starlette.exceptions import HTTPException
 from starlette.requests import Request
 
-from src.controllers import essentials, exceptions
+from src.controllers import essentials, exceptions, demos
 from src.services.context import context
 
 app = FastAPI(title=context.get("app.name"), debug=context.get("app.debug"), version=context.get("app.version"))
@@ -35,6 +35,11 @@ def server_exception_handler(request: Request, exception: Exception):
 @app.get("/")
 def home(request: Request):
     return essentials.home(request, context)
+
+
+@app.get("/demos/")
+def home(request: Request):
+    return demos.router(request, context)
 
 
 @app.get(f"/{context.get('routes.error')}/")
