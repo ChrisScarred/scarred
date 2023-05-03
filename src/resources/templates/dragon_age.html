@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Prepočet dračieho veku na ľudský</h2>
+  
+Tu môžeš zistiť, koľko rokov by mala tvoja dračia postava z Eriniamu, ak by bola človek.
+
+<form method="post">
+    <label for="species">Plemeno draka:</label>
+    <select id="species" name="species">
+      <option value="ice">Chladný</option>
+      <option value="lake">Jazerný</option>
+      <option value="forest">Lesný</option>
+      <option value="lowlands">Nížinný</option>
+      <option value="mountain">Horský</option>
+      <option value="fire">Ohnivý</option>
+    </select>
+
+    <label for="age">Vek draka:</label>
+    <input type="number" min=0 id="age" name="age"><br><br>
+    <input type="submit">
+<br><br>
+<input type="submit" value="Poslať">
+</form>
+
+{% if result %}
+<h4>Výsledok</h4>
+<div>{{ result }}</div>
+{% else %}
+<h4>Tu bude výsledok</h4>
+{% endif %}
+
+
+{% endblock %}

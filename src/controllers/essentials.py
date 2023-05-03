@@ -8,7 +8,8 @@ from src.services.context import ContextHandler
 from src.services.startup import StartupManager
 
 
-async def shutdown_event():
+async def shutdown_event(context: ContextHandler) -> None:
+    context.get("Cockroach").close()
     logging.info("Application shut-down complete.")
 
 async def start_up(context: ContextHandler) -> ContextHandler:

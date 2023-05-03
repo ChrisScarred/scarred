@@ -38,9 +38,9 @@ def home(request: Request):
 
 
 @app.get("/demos/")
-def home(request: Request):
+@app.post("/demos/")
+async def home(request: Request):
     return demos.router(request, context)
-
 
 @app.get(f"/{context.get('routes.error')}/")
 def error_generic(request: Request):
