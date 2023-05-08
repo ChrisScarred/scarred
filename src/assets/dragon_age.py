@@ -31,7 +31,7 @@ def _float_to_time(val: float) -> Tuple[int, int]:
     months = round((val - years) * 12)
     return years, months
 
-def respond(_type: str, age: int) -> str:
+async def dragon_age_response(_type: str, age: int) -> str:
     y, m = get_dragon_age(_type, age)
     answer = ["Táto postava má"]
     if m == 0:
@@ -50,5 +50,4 @@ def respond(_type: str, age: int) -> str:
             answer.append("mesiace")
         else:
             answer.append("mesiacov")
-    answer.append(".")
-    return " ".join(answer)
+    return " ".join(answer) + "."
