@@ -3,8 +3,8 @@ from functools import lru_cache
 
 from dotenv import load_dotenv
 
-from src.services.config import Config
-from src.services.context import Context
+from src.utils.config import Config
+from src.utils.context import Context
 
 
 @lru_cache

@@ -4,7 +4,7 @@ from typing import Any
 
 from starlette.templating import Jinja2Templates
 
-from src.services.config import Config
+from src.utils.config import Config
 from src.services.db_handler import Cockroach
 from src.services.i18n import Translator
 from src.utils.parsing import nested_getter
