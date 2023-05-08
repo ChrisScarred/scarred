@@ -1,5 +1,6 @@
 from typing import Any, Dict
 
+
 def nested_getter(dct: Dict, var: str, def_val: Any = None) -> Any:
         """Obtain a value of a variable in a nested dict.
         

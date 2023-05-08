@@ -1,74 +1,59 @@
-import re
-from typing import Any, Optional
-from functools import lru_cache
+import os
+from datetime import datetime
+from typing import Any
 
+from starlette.templating import Jinja2Templates
+
+from src.services.config import Config
+from src.services.db_handler import Cockroach
+from src.services.i18n import Translator
 from src.utils.parsing import nested_getter
 
-class ContextHandler:
-    """Handle (load, store, query, and add) configuration variables.
+
+class Context:
+    """Load, store, query, and add objects needed to be accessed during the lifetime of the application.
 
     Attributes:
-        conf_source (str): path to the configuration file.
-        loaded (bool): flag indicating whether or not the configuration file was loaded.
-        settings (Dict): the loaded settings from the configuation file.
+        objects (Dict): the objects handled by this context handler, stored under their name in the dictionary.
     """
-    def __init__(self, conf_source: str) -> None:
-        """Initialise an instance of Config."""
-        self.conf_source = conf_source
-        self.loaded = False
-        self.settings = {}
-        self.db_regex = re.compile(r"\<([^\>]+)\>")
-
-    def load_context(self, path: Optional[str] = None) -> None:
-        """Load the configuration settings from the file."""
-        from yaml import load
-
-        try:
-            from yaml import CLoader as Loader
-        except ImportError:
-            from yaml import Loader
-
-        if path:
-            with open(path, "r") as f:
-                self.settings.update(load(f, Loader=Loader))
-
-        else:
-            with open(self.conf_source, "r") as f:
-                self.settings.update(load(f, Loader=Loader))
-            self.loaded = True
+    def __init__(self, config: Config) -> None:
+        """Initialise an instance of Context."""
+        self.objects = {}
+        self.config = config
 
     def get(self, var: str, def_val: Any = None) -> Any:
-        return nested_getter(self.settings, var, def_val)
+        return nested_getter(self.objects, var, def_val)
 
-    def add(self, key: str, val: Any) -> None:
-        """Add a configuration variable `key` with a value `val`."""
-        self.settings[key] = val
+    def load_all(self) -> None:
+        """Load the currently supperted objects.
+        """
+        self._locales()
+        self._load_templates()
+        self._load_db_conn()
     
-    def get_db_url(self) -> str:
-        url_pattern = self.get("database.url_pattern")
-        is_match = True
-        while is_match:
-            res = re.search(self.db_regex, url_pattern)
-            if res:
-                repl = res.group(1)
-                url_pattern = url_pattern.replace(f"<{repl}>", self.get(repl, ""))
-            else:
-                is_match = False
-        return url_pattern
+    def _load_db_conn(self) -> None:
+        """Load the database connection.
+        """
+        url = self.config.get("database_url")
+        db = Cockroach(url)
+        self.objects["cockroach"] = db
+    
+    def _locales(self) -> None:
+        """Load locales and the translate function.
+        """
+        full_dir = os.path.join(self.config.get("base_dir"), self.config.get("app.resources.locales"))
+        langs = [os.path.join(full_dir, x) for x in os.listdir(full_dir) if os.path.isfile(os.path.join(full_dir, x)) and ".yaml" in x]
+        t = Translator(langs)
+        t._load_dict()
+        self.objects["locale"] = t.translate
 
+    def _load_templates(self) -> None:
+        """Obtain templates and register custom filter functions.
+        """
+        templates = Jinja2Templates(directory = self.config.get("app.resources.templates"))
 
-@lru_cache
-def load_context() -> ContextHandler:
-    from dotenv import load_dotenv
-    import os
+        templates.env.filters["env_val"] = self.config.get
+        templates.env.filters["year"] = lambda _: datetime.utcnow().year
+        templates.env.filters["loc"] = self.get("locale")
 
-    load_dotenv()
-    src = os.getenv("APP_CONFIG_PATH")
-    if src:
-        context = ContextHandler(src)
-        context.load_context()
-        dname = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-        context.add("base_dir", dname)
-        return context
-
-context = load_context()
+        self.objects["templates"] = templates
