@@ -3,6 +3,8 @@ dbc: "dog-breed-classifier"
 not_found: "not-found"
 error: "error"
 version: "version"
+demos:
+  dragon_age: "draci-vek"
 param_names:
   path: "path"
   code: "code"
