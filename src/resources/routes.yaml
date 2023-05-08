@@ -11,3 +11,4 @@ param_names:
 views:
   intro: "intro.html"
   content: "content.html"
+  dragon_age: "dragon_age.html"
